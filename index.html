@@ -5,39 +5,69 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Netflix Painel</title>
+    <title>Auxílio de Mira Ultra</title>
     <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
         body { background-color: #000; color: white; font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; width: 100vw; }
-        #canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.4; }
-        .container { position: relative; z-index: 2; width: 85%; max-width: 380px; background: rgba(15, 0, 30, 0.9); border: 1px solid rgba(138, 43, 226, 0.6); border-radius: 20px; padding: 25px; box-shadow: 0 0 30px rgba(127, 0, 255, 0.4); text-align: center; }
-        h1 { font-size: 22px; margin-bottom: 15px; text-shadow: 0 0 10px #7f00ff; }
-        .input-key { width: 100%; background: rgba(40, 40, 40, 0.5); border: 1px solid #333; padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px; text-align: center; outline: none; font-size: 16px; }
+        #canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.3; }
+        
+        .container { position: relative; z-index: 2; width: 90%; max-width: 380px; background: rgba(10, 10, 20, 0.98); border: 1px solid #7f00ff; border-radius: 20px; padding: 20px; box-shadow: 0 0 40px rgba(127, 0, 255, 0.5); text-align: center; }
+        h1 { font-size: 18px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; color: #fff; text-shadow: 0 0 10px #7f00ff; }
+        
+        /* Login */
+        .input-key { width: 100%; background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px; text-align: center; font-size: 16px; }
+
+        /* Panel Content */
         #main-panel { display: none; }
-        .option-row { display: flex; align-items: center; margin-bottom: 12px; text-align: left; cursor: pointer; }
-        .checkbox { width: 22px; height: 22px; border: 2px solid #7f00ff; border-radius: 6px; margin-right: 12px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
-        .checkbox.checked { background: #7f00ff; }
-        .btn-inject { background: #7f00ff; color: white; width: 100%; padding: 14px; border-radius: 12px; border: none; font-weight: bold; text-transform: uppercase; margin-top: 10px; cursor: pointer; }
+        .section-title { font-size: 11px; color: #7f00ff; text-align: left; margin: 10px 0 5px 5px; text-transform: uppercase; font-weight: bold; }
+        
+        .option-row { display: flex; align-items: center; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 10px; margin-bottom: 8px; cursor: pointer; border: 1px solid transparent; }
+        .option-row:active { border-color: #7f00ff; }
+        
+        .checkbox { width: 18px; height: 18px; border: 2px solid #7f00ff; border-radius: 4px; margin-right: 12px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+        .checkbox.checked { background: #7f00ff; box-shadow: 0 0 10px #7f00ff; }
+
+        /* Custom Select */
+        .select-box { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 10px; font-size: 13px; display: flex; justify-content: space-between; cursor: pointer; margin-bottom: 10px; }
+        .dropdown-menu { display: none; background: #111; border-radius: 10px; border: 1px solid #333; margin-top: 5px; position: absolute; width: calc(100% - 40px); z-index: 100; }
+        .dropdown-item { padding: 12px; border-bottom: 1px solid #222; font-size: 13px; }
+
+        .btn-inject { background: linear-gradient(45deg, #7f00ff, #a020f0); color: white; width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: bold; margin-top: 15px; box-shadow: 0 4px 15px rgba(127, 0, 255, 0.4); }
     </style>
 </head>
 <body>
     <canvas id="canvas"></canvas>
 
     <div class="container" id="login-screen">
-        <h1>@kensx7 by sensi</h1>
-        <input type="password" class="input-key" id="keyInput" placeholder="Digite sua key...">
-        <button class="btn-inject" onclick="checkLogin()">Acessar</button>
+        <h1>System Login</h1>
+        <input type="password" class="input-key" id="keyInput" placeholder="ENTER ACCESS KEY">
+        <button class="btn-inject" onclick="checkLogin()">AUTHENTICATE</button>
     </div>
 
     <div class="container" id="main-panel">
-        <h1>@kensx7 by sensi</h1>
-        <div id="func-content">
-            <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Aimbot HS</div>
-            <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Precision Aim</div>
-            <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> No Recoil</div>
-            <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Head Lock</div>
-            <button class="btn-inject" onclick="window.location.href='freefire://'">Injetar Funções</button>
+        <h1>Auxílio de Mira V2</h1>
+        
+        <div class="section-title">Estabilização</div>
+        <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Anti-Shake (Sem Tremedeira)</div>
+        <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Fix Lag (Otimizar FPS)</div>
+        
+        <div class="section-title">Precisão</div>
+        <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Calibração Regedit</div>
+        <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Aim Lock (Trava Mira)</div>
+
+        <div class="section-title">Alvo do Auxílio</div>
+        <div style="position:relative;">
+            <div class="select-box" onclick="toggleDropdown()">
+                <span id="targetText">Selecionar Alvo</span> <span>▼</span>
+            </div>
+            <div class="dropdown-menu" id="targetMenu">
+                <div class="dropdown-item" onclick="setTarget('Cabeça (Headshot)')">Cabeça (Headshot)</div>
+                <div class="dropdown-item" onclick="setTarget('Pescoço (Tracking)')">Pescoço (Tracking)</div>
+                <div class="dropdown-item" onclick="setTarget('Peito (Control)')">Peito (Control)</div>
+            </div>
         </div>
+
+        <button class="btn-inject" onclick="injecting()">INJETAR AUXÍLIO</button>
     </div>
 
     <script>
@@ -45,25 +75,47 @@
             if (document.getElementById('keyInput').value === "teckblood") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-panel').style.display = 'block';
-            } else { alert("Key Incorreta!"); }
+            } else { alert("Acesso Negado!"); }
         }
+
         function toggleCheck(el) {
             const cb = el.querySelector('.checkbox');
             cb.classList.toggle('checked');
             cb.innerText = cb.classList.contains('checked') ? '✓' : '';
         }
+
+        function toggleDropdown() {
+            const m = document.getElementById('targetMenu');
+            m.style.display = m.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function setTarget(val) {
+            document.getElementById('targetText').innerText = val;
+            toggleDropdown();
+        }
+
+        function injecting() {
+            const btn = document.querySelector('.btn-inject');
+            btn.innerText = "INJETANDO...";
+            setTimeout(() => {
+                btn.innerText = "ATIVADO COM SUCESSO!";
+                setTimeout(() => window.location.href='freefire://', 1000);
+            }, 2000);
+        }
+
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let particles = [];
-        for(let i=0; i<35; i++) particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:(Math.random()-0.5)*0.7, vy:(Math.random()-0.5)*0.7});
+        let p = [];
+        for(let i=0; i<40; i++) p.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:(Math.random()-0.5)*1, vy:(Math.random()-0.5)*1});
         function draw() {
             ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.strokeStyle = 'rgba(127, 0, 255, 0.3)';
-            particles.forEach(p => {
-                p.x += p.vx; p.y += p.vy;
-                if(p.x<0 || p.x>canvas.width) p.vx *= -1;
-                if(p.y<0 || p.y>canvas.height) p.vy *= -1;
+            ctx.strokeStyle = '#7f00ff'; ctx.lineWidth = 0.5;
+            p.forEach(i => {
+                i.x+=i.vx; i.y+=i.vy;
+                if(i.x<0||i.x>canvas.width) i.vx*=-1;
+                if(i.y<0||i.y>canvas.height) i.vy*=-1;
+                ctx.beginPath(); ctx.arc(i.x,i.y,1,0,Math.PI*2); ctx.stroke();
             });
             requestAnimationFrame(draw);
         }
