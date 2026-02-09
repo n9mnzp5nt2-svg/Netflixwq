@@ -2,124 +2,285 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Auxílio de Mira Ultra</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Kensxz7</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; outline: none; }
-        body { background-color: #000; color: white; font-family: -apple-system, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; width: 100vw; }
-        #canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; opacity: 0.3; }
-        
-        .container { position: relative; z-index: 2; width: 90%; max-width: 380px; background: rgba(10, 10, 20, 0.98); border: 1px solid #7f00ff; border-radius: 20px; padding: 20px; box-shadow: 0 0 40px rgba(127, 0, 255, 0.5); text-align: center; }
-        h1 { font-size: 18px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 2px; color: #fff; text-shadow: 0 0 10px #7f00ff; }
-        
-        /* Login */
-        .input-key { width: 100%; background: #1a1a1a; border: 1px solid #333; padding: 15px; border-radius: 12px; color: white; margin-bottom: 20px; text-align: center; font-size: 16px; }
+        :root {
+            --bg-color: #1a0210;
+            --panel-bg: rgba(46, 5, 30, 0.9);
+            --accent-color: #ff007f;
+            --text-color: #ffffff;
+            --secondary-text: #b36b91;
+            --input-bg: rgba(60, 10, 40, 0.6);
+            --success-color: #00ff88;
+        }
 
-        /* Panel Content */
-        #main-panel { display: none; }
-        .section-title { font-size: 11px; color: #7f00ff; text-align: left; margin: 10px 0 5px 5px; text-transform: uppercase; font-weight: bold; }
-        
-        .option-row { display: flex; align-items: center; background: rgba(255,255,255,0.03); padding: 12px; border-radius: 10px; margin-bottom: 8px; cursor: pointer; border: 1px solid transparent; }
-        .option-row:active { border-color: #7f00ff; }
-        
-        .checkbox { width: 18px; height: 18px; border: 2px solid #7f00ff; border-radius: 4px; margin-right: 12px; display: flex; align-items: center; justify-content: center; font-size: 12px; }
-        .checkbox.checked { background: #7f00ff; box-shadow: 0 0 10px #7f00ff; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
 
-        /* Custom Select */
-        .select-box { background: #1a1a1a; border: 1px solid #333; padding: 12px; border-radius: 10px; font-size: 13px; display: flex; justify-content: space-between; cursor: pointer; margin-bottom: 10px; }
-        .dropdown-menu { display: none; background: #111; border-radius: 10px; border: 1px solid #333; margin-top: 5px; position: absolute; width: calc(100% - 40px); z-index: 100; }
-        .dropdown-item { padding: 12px; border-bottom: 1px solid #222; font-size: 13px; }
+        /* TELA DE LOGIN */
+        #login-screen {
+            width: 350px;
+            padding: 40px;
+            background: var(--panel-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.2);
+        }
 
-        .btn-inject { background: linear-gradient(45deg, #7f00ff, #a020f0); color: white; width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: bold; margin-top: 15px; box-shadow: 0 4px 15px rgba(127, 0, 255, 0.4); }
+        .login-icon { font-size: 50px; color: var(--accent-color); margin-bottom: 20px; }
+        h2 { margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 0, 127, 0.3);
+            background: var(--input-bg);
+            color: white;
+            text-align: center;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        .btn-general {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            background: var(--accent-color);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 13px;
+        }
+
+        /* PAINEL PRINCIPAL */
+        #main-panel {
+            display: none;
+            width: 380px;
+            height: 580px; /* Aumentado levemente para caber o botão injetar */
+            background: var(--panel-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 30px;
+            flex-direction: row;
+            overflow: hidden;
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.3);
+        }
+
+        .sidebar { width: 85px; background: rgba(30, 3, 20, 0.95); border-right: 1px solid rgba(255, 0, 127, 0.3); display: flex; flex-direction: column; align-items: center; padding-top: 20px; gap: 15px; }
+        .side-btn { width: 55px; height: 55px; border-radius: 12px; background: transparent; border: 1px solid rgba(255, 0, 127, 0.2); color: white; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; }
+        .side-btn.active { background: var(--accent-color); box-shadow: 0 0 15px var(--accent-color); }
+        
+        .content { flex: 1; padding: 25px; position: relative; display: flex; flex-direction: column; }
+        
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            color: var(--secondary-text);
+            transition: 0.3s;
+            z-index: 10;
+        }
+        .close-btn:hover { color: var(--accent-color); }
+
+        .tab-pane { display: none; height: 100%; }
+        .tab-pane.active { display: block; }
+        
+        .header-area { display: flex; align-items: center; gap: 12px; margin-bottom: 25px; margin-top: 10px;}
+        .icon-box { width: 45px; height: 45px; border: 2px solid var(--accent-color); border-radius: 10px; display: flex; justify-content: center; align-items: center; }
+        
+        .option-item { background: var(--input-bg); border-radius: 12px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 13px; }
+        
+        /* Switch */
+        .switch { position: relative; width: 38px; height: 18px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #333; border-radius: 20px; transition: .4s; }
+        .slider:before { position: absolute; content: ""; height: 12px; width: 12px; left: 3px; bottom: 3px; background: white; border-radius: 50%; transition: .4s; }
+        input:checked + .slider { background: var(--accent-color); }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* Botão Injetar */
+        .btn-inject {
+            background: transparent;
+            border: 1px solid var(--accent-color);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+        .btn-inject:hover { background: rgba(255, 0, 127, 0.1); box-shadow: 0 0 10px var(--accent-color); }
+
+        .footer { text-align: center; margin-top: auto; padding-bottom: 5px;}
+        .footer .handle { color: var(--accent-color); font-weight: bold; font-size: 13px; display: block;}
+        .footer .credit { font-size: 10px; color: var(--secondary-text); }
     </style>
 </head>
 <body>
-    <canvas id="canvas"></canvas>
 
-    <div class="container" id="login-screen">
-        <h1>System Login</h1>
-        <input type="password" class="input-key" id="keyInput" placeholder="ENTER ACCESS KEY">
-        <button class="btn-inject" onclick="checkLogin()">AUTHENTICATE</button>
+    <div id="login-screen">
+        <div class="login-icon"><i class="fas fa-fingerprint"></i></div>
+        <h2>Acesso</h2>
+        <p style="color: var(--secondary-text); font-size: 12px;">Insira sua chave k1ng</p>
+        <input type="password" id="passInput" placeholder="SENHA">
+        <button id="loginBtn" class="btn-general" onclick="startLogin()">Acessar</button>
+        
+        <div style="margin-top: 35px;">
+            <span style="color:var(--accent-color); font-size: 12px; font-weight: bold;">@kensxz7</span><br>
+            <span style="color:var(--secondary-text); font-size: 10px;">By Vzpedrin7</span>
+        </div>
     </div>
 
-    <div class="container" id="main-panel">
-        <h1>Auxílio de Mira V2</h1>
-        
-        <div class="section-title">Estabilização</div>
-        <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Anti-Shake (Sem Tremedeira)</div>
-        <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Fix Lag (Otimizar FPS)</div>
-        
-        <div class="section-title">Precisão</div>
-        <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Calibração Regedit</div>
-        <div class="option-row" onclick="toggleCheck(this)"><div class="checkbox"></div> Aim Lock (Trava Mira)</div>
-
-        <div class="section-title">Alvo do Auxílio</div>
-        <div style="position:relative;">
-            <div class="select-box" onclick="toggleDropdown()">
-                <span id="targetText">Selecionar Alvo</span> <span>▼</span>
-            </div>
-            <div class="dropdown-menu" id="targetMenu">
-                <div class="dropdown-item" onclick="setTarget('Cabeça (Headshot)')">Cabeça (Headshot)</div>
-                <div class="dropdown-item" onclick="setTarget('Pescoço (Tracking)')">Pescoço (Tracking)</div>
-                <div class="dropdown-item" onclick="setTarget('Peito (Control)')">Peito (Control)</div>
-            </div>
+    <div id="main-panel">
+        <div class="sidebar">
+            <button class="side-btn active" onclick="openTab('aimbot', this)"><i class="fas fa-crosshairs"></i></button>
+            <button class="side-btn" onclick="openTab('config', this)"><i class="fas fa-cog"></i></button>
+            <button class="side-btn" onclick="openTab('head', this)"><i class="fas fa-skull"></i></button>
+            <button class="side-btn" onclick="openTab('info', this)"><i class="fas fa-info-circle"></i></button>
         </div>
 
-        <button class="btn-inject" onclick="injecting()">INJETAR AUXÍLIO</button>
+        <div class="content">
+            <div class="close-btn" onclick="backToLogin()"><i class="fas fa-times"></i></div>
+
+            <div id="aimbot" class="tab-pane active">
+                <div class="header-area">
+                    <div class="icon-box"><i class="fas fa-crosshairs"></i></div>
+                    <div><h2 style="font-size:16px; margin:0;">AIMBOT</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">Configurações de mira</p></div>
+                </div>
+                <div class="option-item"><span>Aimbot</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="option-item"><span>Precisão Full</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div style="background:var(--input-bg); padding:12px; border-radius:12px; margin-top:10px;">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size: 12px;"><span>FOV</span><span id="fval">10</span></div>
+                    <input type="range" min="0" max="60" value="10" style="width:100%; accent-color:var(--accent-color);" oninput="document.getElementById('fval').innerText = this.value">
+                </div>
+            </div>
+
+            <div id="config" class="tab-pane">
+                <div class="header-area">
+                    <div class="icon-box"><i class="fas fa-cog"></i></div>
+                    <div><h2 style="font-size:16px; margin:0;">Configurações</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">otimizar mira e jogo</p></div>
+                </div>
+                <div class="option-item"><span>Mira Travada</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="option-item"><span>Calibrar Mira</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="option-item"><span>Norecoil</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+
+            <div id="head" class="tab-pane">
+                <div class="header-area">
+                    <div class="icon-box"><i class="fas fa-skull"></i></div>
+                    <div><h2 style="font-size:16px; margin:0;">Head</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">headtrick para sua mira</p></div>
+                </div>
+                <div class="option-item"><span>AIM lock</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="option-item"><span>Redução de lag 🛜</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="option-item"><span>Redução de bug</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                <div class="option-item"><span>Redução de recoil</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+
+            <div id="info" class="tab-pane">
+                <div class="header-area">
+                    <div class="icon-box"><i class="fas fa-info-circle"></i></div>
+                    <div><h2 style="font-size:16px; margin:0;">Info</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">informações do painel</p></div>
+                </div>
+                <div style="font-size:12px; line-height:1.6;">
+                    <p><b>DESENVOLVEDOR:</b> @kensxz7</p>
+                    <p><b>STATUS:</b> online 🟢</p>
+                    <p><b>DONOS:</b> @kensx7 e new auxílio</p>
+                    <p style="color:#7289da; font-size:10px;">Discord: https://discord.gg/Z3XfXXKrY</p>
+                </div>
+            </div>
+
+            <button id="injectBtn" class="btn-inject" onclick="startInjection()">Injetar</button>
+            
+            <div class="footer">
+                <span class="handle">@kensxz7</span>
+                <span class="credit">By Vzpedrin7</span>
+            </div>
+        </div>
     </div>
 
     <script>
-        function checkLogin() {
-            if (document.getElementById('keyInput').value === "teckblood") {
-                document.getElementById('login-screen').style.display = 'none';
-                document.getElementById('main-panel').style.display = 'block';
-            } else { alert("Acesso Negado!"); }
-        }
+        // LOGIN LOGIC
+        function startLogin() {
+            const btn = document.getElementById('loginBtn');
+            const pass = document.getElementById('passInput').value;
+            btn.disabled = true;
 
-        function toggleCheck(el) {
-            const cb = el.querySelector('.checkbox');
-            cb.classList.toggle('checked');
-            cb.innerText = cb.classList.contains('checked') ? '✓' : '';
-        }
-
-        function toggleDropdown() {
-            const m = document.getElementById('targetMenu');
-            m.style.display = m.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function setTarget(val) {
-            document.getElementById('targetText').innerText = val;
-            toggleDropdown();
-        }
-
-        function injecting() {
-            const btn = document.querySelector('.btn-inject');
-            btn.innerText = "INJETANDO...";
             setTimeout(() => {
-                btn.innerText = "ATIVADO COM SUCESSO!";
-                setTimeout(() => window.location.href='freefire://', 1000);
+                btn.innerText = "Acessando";
+                setTimeout(() => {
+                    if (pass === "k1ng") {
+                        document.getElementById('login-screen').style.display = 'none';
+                        document.getElementById('main-panel').style.display = 'flex';
+                        btn.innerText = "Acessar";
+                        btn.disabled = false;
+                    } else {
+                        btn.innerText = "senha incorreta tente novamente";
+                        btn.style.color = "#ff3333";
+                        btn.disabled = false;
+                        setTimeout(() => { 
+                            btn.innerText = "Acessar"; 
+                            btn.style.color = "white";
+                        }, 2000);
+                    }
+                }, 3000);
             }, 2000);
         }
 
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let p = [];
-        for(let i=0; i<40; i++) p.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, vx:(Math.random()-0.5)*1, vy:(Math.random()-0.5)*1});
-        function draw() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            ctx.strokeStyle = '#7f00ff'; ctx.lineWidth = 0.5;
-            p.forEach(i => {
-                i.x+=i.vx; i.y+=i.vy;
-                if(i.x<0||i.x>canvas.width) i.vx*=-1;
-                if(i.y<0||i.y>canvas.height) i.vy*=-1;
-                ctx.beginPath(); ctx.arc(i.x,i.y,1,0,Math.PI*2); ctx.stroke();
-            });
-            requestAnimationFrame(draw);
+        // BACK TO LOGIN (CLOSE X)
+        function backToLogin() {
+            document.getElementById('main-panel').style.display = 'none';
+            document.getElementById('login-screen').style.display = 'block';
+            document.getElementById('passInput').value = ""; // Limpa a senha
         }
-        draw();
+
+        // INJECTION LOGIC
+        function startInjection() {
+            const btn = document.getElementById('injectBtn');
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerText = "Injetando";
+                btn.style.color = var(--accent-color);
+                
+                setTimeout(() => {
+                    btn.innerText = "Injetado";
+                    btn.style.color = "#00ff88"; // Cor verde para sucesso
+                    btn.style.borderColor = "#00ff88";
+                }, 2000);
+            }, 2000);
+        }
+
+        // TAB NAVIGATION
+        function openTab(tabId, btn) {
+            const tabs = document.querySelectorAll('.tab-pane');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            const buttons = document.querySelectorAll('.side-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
     </script>
 </body>
 </html>
