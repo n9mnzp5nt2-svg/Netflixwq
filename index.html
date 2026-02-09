@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Kensxz7</title>
+    <title>BALA FINI - Painel</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
@@ -40,7 +40,7 @@
         }
 
         .login-icon { font-size: 50px; color: var(--accent-color); margin-bottom: 20px; }
-        h2 { margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px; }
+        h2 { margin-bottom: 5px; text-transform: uppercase; letter-spacing: 3px; font-size: 28px; }
         
         input[type="password"] {
             width: 100%;
@@ -66,14 +66,14 @@
             cursor: pointer;
             transition: 0.3s;
             text-transform: uppercase;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         /* PAINEL PRINCIPAL */
         #main-panel {
             display: none;
             width: 380px;
-            height: 580px; /* Aumentado levemente para caber o botão injetar */
+            height: 580px;
             background: var(--panel-bg);
             border: 2px solid var(--accent-color);
             border-radius: 30px;
@@ -95,10 +95,8 @@
             font-size: 20px;
             cursor: pointer;
             color: var(--secondary-text);
-            transition: 0.3s;
             z-index: 10;
         }
-        .close-btn:hover { color: var(--accent-color); }
 
         .tab-pane { display: none; height: 100%; }
         .tab-pane.active { display: block; }
@@ -129,9 +127,7 @@
             transition: 0.3s;
             text-transform: uppercase;
             font-size: 12px;
-            letter-spacing: 1px;
         }
-        .btn-inject:hover { background: rgba(255, 0, 127, 0.1); box-shadow: 0 0 10px var(--accent-color); }
 
         .footer { text-align: center; margin-top: auto; padding-bottom: 5px;}
         .footer .handle { color: var(--accent-color); font-weight: bold; font-size: 13px; display: block;}
@@ -142,9 +138,9 @@
 
     <div id="login-screen">
         <div class="login-icon"><i class="fas fa-fingerprint"></i></div>
-        <h2>Acesso</h2>
-        <p style="color: var(--secondary-text); font-size: 12px;">Insira sua chave k1ng</p>
-        <input type="password" id="passInput" placeholder="SENHA">
+        <h2>BALA FINI</h2>
+        <p style="color: var(--secondary-text); font-size: 12px; margin-bottom: 25px;">insira sua KEY aqui</p>
+        <input type="password" id="passInput" placeholder="••••">
         <button id="loginBtn" class="btn-general" onclick="startLogin()">Acessar</button>
         
         <div style="margin-top: 35px;">
@@ -167,7 +163,7 @@
             <div id="aimbot" class="tab-pane active">
                 <div class="header-area">
                     <div class="icon-box"><i class="fas fa-crosshairs"></i></div>
-                    <div><h2 style="font-size:16px; margin:0;">AIMBOT</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">Configurações de mira</p></div>
+                    <div><h2 style="font-size:16px; margin:0; letter-spacing: 1px;">AIMBOT</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">Configurações de mira</p></div>
                 </div>
                 <div class="option-item"><span>Aimbot</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
                 <div class="option-item"><span>Precisão Full</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
@@ -180,7 +176,7 @@
             <div id="config" class="tab-pane">
                 <div class="header-area">
                     <div class="icon-box"><i class="fas fa-cog"></i></div>
-                    <div><h2 style="font-size:16px; margin:0;">Configurações</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">otimizar mira e jogo</p></div>
+                    <div><h2 style="font-size:16px; margin:0; letter-spacing: 1px;">Configurações</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">otimizar mira e jogo</p></div>
                 </div>
                 <div class="option-item"><span>Mira Travada</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
                 <div class="option-item"><span>Calibrar Mira</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
@@ -190,7 +186,7 @@
             <div id="head" class="tab-pane">
                 <div class="header-area">
                     <div class="icon-box"><i class="fas fa-skull"></i></div>
-                    <div><h2 style="font-size:16px; margin:0;">Head</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">headtrick para sua mira</p></div>
+                    <div><h2 style="font-size:16px; margin:0; letter-spacing: 1px;">Head</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">headtrick para sua mira</p></div>
                 </div>
                 <div class="option-item"><span>AIM lock</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
                 <div class="option-item"><span>Redução de lag 🛜</span><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
@@ -201,13 +197,13 @@
             <div id="info" class="tab-pane">
                 <div class="header-area">
                     <div class="icon-box"><i class="fas fa-info-circle"></i></div>
-                    <div><h2 style="font-size:16px; margin:0;">Info</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">informações do painel</p></div>
+                    <div><h2 style="font-size:16px; margin:0; letter-spacing: 1px;">Info</h2><p style="font-size:10px; margin:0; color:var(--secondary-text);">informações do painel</p></div>
                 </div>
                 <div style="font-size:12px; line-height:1.6;">
                     <p><b>DESENVOLVEDOR:</b> @kensxz7</p>
                     <p><b>STATUS:</b> online 🟢</p>
                     <p><b>DONOS:</b> @kensx7 e new auxílio</p>
-                    <p style="color:#7289da; font-size:10px;">Discord: https://discord.gg/Z3XfXXKrY</p>
+                    <p style="color:#7289da; font-size:10px; margin-top:10px;">Discord: https://discord.gg/Z3XfXXKrY</p>
                 </div>
             </div>
 
@@ -221,14 +217,16 @@
     </div>
 
     <script>
-        // LOGIN LOGIC
         function startLogin() {
             const btn = document.getElementById('loginBtn');
             const pass = document.getElementById('passInput').value;
             btn.disabled = true;
 
+            // 2 segundos para mudar para "Acessando"
             setTimeout(() => {
                 btn.innerText = "Acessando";
+                
+                // 3 segundos no "Acessando" antes de verificar
                 setTimeout(() => {
                     if (pass === "k1ng") {
                         document.getElementById('login-screen').style.display = 'none';
@@ -237,42 +235,36 @@
                         btn.disabled = false;
                     } else {
                         btn.innerText = "senha incorreta tente novamente";
-                        btn.style.color = "#ff3333";
+                        btn.style.background = "#ff3333";
                         btn.disabled = false;
                         setTimeout(() => { 
                             btn.innerText = "Acessar"; 
-                            btn.style.color = "white";
+                            btn.style.background = "#ff007f";
                         }, 2000);
                     }
                 }, 3000);
             }, 2000);
         }
 
-        // BACK TO LOGIN (CLOSE X)
         function backToLogin() {
             document.getElementById('main-panel').style.display = 'none';
             document.getElementById('login-screen').style.display = 'block';
-            document.getElementById('passInput').value = ""; // Limpa a senha
+            document.getElementById('passInput').value = "";
         }
 
-        // INJECTION LOGIC
         function startInjection() {
             const btn = document.getElementById('injectBtn');
             btn.disabled = true;
-
             setTimeout(() => {
                 btn.innerText = "Injetando";
-                btn.style.color = var(--accent-color);
-                
                 setTimeout(() => {
                     btn.innerText = "Injetado";
-                    btn.style.color = "#00ff88"; // Cor verde para sucesso
+                    btn.style.color = "#00ff88";
                     btn.style.borderColor = "#00ff88";
                 }, 2000);
             }, 2000);
         }
 
-        // TAB NAVIGATION
         function openTab(tabId, btn) {
             const tabs = document.querySelectorAll('.tab-pane');
             tabs.forEach(tab => tab.classList.remove('active'));
